@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: nexus-copilot-ui
+    runtime: python
+    plan: starter                        # or "free" for $0 dev
+    region: frankfurt                    # closest to eu-west-1
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection true
+    envVars:
+      - key: AWS_REGION
+        value: eu-west-1
+      - key: BEDROCK_AGENT_ID
+        sync: false                       # set in Render dashboard (secret)
+      - key: BEDROCK_AGENT_ALIAS_ID
+        sync: false
+      - key: REDSHIFT_WORKGROUP
+        value: nexus-wg
+      - key: REDSHIFT_DATABASE
+        value: compliance
+      - key: REDSHIFT_SECRET_ARN
+        sync: false
+      - key: COGNITO_USER_POOL_ID
+        sync: false
+      - key: COGNITO_CLIENT_ID
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false                       # IAM user creds for boto3
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+    healthCheckPath: /_stcore/health      # Streamlit's built-in health endpoint
+    autoDeploy: true
