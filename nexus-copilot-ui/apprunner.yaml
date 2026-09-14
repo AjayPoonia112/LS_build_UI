@@ -1,0 +1,27 @@
+version: 1.0
+runtime: python311
+build:
+  commands:
+    build:
+      - pip install --no-cache-dir -r requirements.txt
+run:
+  runtime-version: 3.11
+  command: streamlit run app.py --server.port 8080 --server.address 0.0.0.0
+  network:
+    port: 8080
+    env: PORT
+  env:
+    - name: AWS_REGION
+      value: eu-west-1
+    - name: BEDROCK_AGENT_ID
+      value: AGENTXXXX
+    - name: BEDROCK_AGENT_ALIAS_ID
+      value: TSTALIASID
+    - name: REDSHIFT_WORKGROUP
+      value: nexus-wg
+    - name: REDSHIFT_DATABASE
+      value: compliance
+    - name: COGNITO_USER_POOL_ID
+      value: eu-west-1_XXXXX
+    - name: COGNITO_CLIENT_ID
+      value: xxxxxxxxxxxxxxxx
