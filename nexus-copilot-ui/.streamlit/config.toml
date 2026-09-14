@@ -1,0 +1,15 @@
+[theme]
+primaryColor = "#1E3A8A"          # Nexus navy
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F5F9"
+textColor = "#0F172A"
+font = "sans serif"
+
+[server]
+headless = true
+port = 8080
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
