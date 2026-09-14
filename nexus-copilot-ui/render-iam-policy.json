@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeBedrockAgent",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeAgent",
+        "bedrock-agent-runtime:InvokeAgent"
+      ],
+      "Resource": "arn:aws:bedrock:eu-west-1:*:agent-alias/*"
+    },
+    {
+      "Sid": "RedshiftDataAPI",
+      "Effect": "Allow",
+      "Action": [
+        "redshift-data:ExecuteStatement",
+        "redshift-data:DescribeStatement",
+        "redshift-data:GetStatementResult"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "GetRedshiftSecret",
+      "Effect": "Allow",
+      "Action": "secretsmanager:GetSecretValue",
+      "Resource": "arn:aws:secretsmanager:eu-west-1:*:secret:nexus-redshift-*"
+    },
+    {
+      "Sid": "CognitoAuth",
+      "Effect": "Allow",
+      "Action": [
+        "cognito-idp:InitiateAuth",
+        "cognito-idp:RespondToAuthChallenge"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
